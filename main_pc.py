@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Thu Feb  1 22:38:04 2024
+
+@author: teodo
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Tue Jan 16 08:21:38 2024
 
 @author: teodo
@@ -25,7 +32,7 @@ email = ""
 password = ""
 
 
-
+#yKwvl
 
 options = Options()
 options.add_argument("--mute-audio")
@@ -213,6 +220,14 @@ class robot():
         except:
             pass
             #print("Couldtn locate cont")
+    def streak_thing_button(self):
+        try:
+            continue_button = self.driver.find_elements(By.CLASS_NAME, "yKwvl")
+            random_button=random.choice(continue_button)
+            random_button.click()
+        except:
+            pass
+    
     
     def often_boxs(self):
         try:
@@ -295,8 +310,12 @@ class robot():
                 if count % 10==0:
                     #self.Account()
                     self.Try_login(2)
-                #if count % 15 == 0:
-                    #self.keep_playing()
+                if count % 30==0:
+                    streak_thing_button()
+                if count % 75 == 0:
+                    rando=random.choice(actuelle_lessons)
+                    self.driver.get(f"https://www.duolingo.com/lesson/unit/{rando[0]}/level/{rando[1]}")
+
                 count+=1
             except:
                 pass
