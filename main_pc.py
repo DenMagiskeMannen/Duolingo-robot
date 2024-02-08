@@ -225,6 +225,10 @@ class robot():
             continue_button = self.driver.find_elements(By.CLASS_NAME, "yKwvl")
             random_button=random.choice(continue_button)
             random_button.click()
+            continue_button = self.driver.find_elements(By.CLASS_NAME, "_1fHYG")
+            random_button=random.choice(continue_button)
+            random_button.click()
+            #_1fHYG
         except:
             pass
     
