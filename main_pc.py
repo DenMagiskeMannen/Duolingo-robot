@@ -49,10 +49,28 @@ for i in range(thredlies):
 
 """
 #cookeisese=cool_driver.get_cookies()
-thredlies=5
+thredlies=1
 
+#aria-label="Lesson"
+#aria-label="Story"
+#_1eJKW _16r-S y_aHp _3xT0z
+#_1eJKW _16r-S _6-Jk5 _3xT0z
+#_1eJKW _16r-S _6-Jk5 _3xT0z
+#_1eJKW _16r-S _3pULP _3xT0z
+
+
+#_1reas
+#Unclickable
+#src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/3ea75bf2164eed9218a7163be002af82.svg"
+
+#Clickable
+#src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/5367427ba2aa472b8cc5ddb13ebabf2c.svg"
+Clickable_Story=["https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/5367427ba2aa472b8cc5ddb13ebabf2c.svg"]
+Clickable_Story.append("https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/7aa61c3f60bd961a60a46fb36e76c72f.svg")
+#src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/7aa61c3f60bd961a60a46fb36e76c72f.svg"
 
 class Overseer():
+    Found_stories=True
     def __init__(self,New_account=False):
         self.account=New_account
         self.name="Bob"
@@ -96,30 +114,59 @@ class Overseer():
         
     def refresh(self):
         self.driver.navigate().refresh()
+        
+    def get_stories(self):
+        elements = self.driver.find_elements(By.CLASS_NAME, "_1reas")
+
+        for element in elements:
+            src_attribute = element.get_attribute("src")
+            #print("Src attribute:", src_attribute)
+            if src_attribute in Clickable_Story:
+                print("Src attribute:", src_attribute)
+                
+                #time.sleep(1)
+                element.click()
+                #time.sleep(1)
+                #class="_30qMV _2N_A5 _36Vd3 _16r-S KSXIb _2CJe1 _12StQ"
+                popup= self.driver.find_element(By.CLASS_NAME, "_30qMV _2N_A5 _36Vd3 _16r-S KSXIb _2CJe1 _12StQ")
+                level=popup.get_attribute("href")
+                print(level)
+                #_30qMV _2N_A5 _36Vd3 _16r-S KSXIb _2CJe1 _12StQ
+                
+                
+                
+            
+        self.Found_stories=True
+        print("Found all stories!")
+            
     def run(self):
         #_1eJKW
         
         count=1
+        
         while True:
             try:
+                
                 lessons=self.driver.find_elements(By.CLASS_NAME, "_1eJKW")
                 self.Try_login(2)
-                if count%25==0:
-                    self.driver.get("https://www.duolingo.com/leaderboard")
-                
+                if self.Found_stories==True:
+                    if count%25==0:
+                        self.driver.get("https://www.duolingo.com/leaderboard")
+                    if count %250 == 0:
+                        self.driver.get("https://www.duolingo.com/learn")
+                        self.get_stories()
+                    
+               
+                elif self.Found_stories==False:
+                    if count%20==0:
+                        self.driver.get("https://www.duolingo.com/learn")
+                        self.get_stories()
+                        
+                #print(count)
                 url=self.get_url()
                 #print(url)
                 if url == "https://www.duolingo.com/":
                     self.driver.get("https://www.duolingo.com/lesson/unit/21/level/7")
-                
-                #if url != "https://www.duolingo.com/leaderboard" or url != "https://www.duolingo.com/lesson/unit/21/level/7?isLoggingIn=true":
-                    #self.driver.get("https://www.duolingo.com/lesson/unit/21/level/7")
-                        #https://www.duolingo.com/
-                if count % 10 ==0:
-                    
-                    #self.refresh()
-                    pass
-                #print(count)
                 
                 time.sleep(1)
             except:
@@ -410,6 +457,8 @@ prev=None
 while True:
     time.sleep(1)
     #print(len(threads))
+    
+    
     if (len(threads))<thredlies:
        x_pos=give_next_x(prev)
        bob=Fcuk_you_chat(x_pos,25)
@@ -420,6 +469,7 @@ while True:
            time.sleep(1)
     elif (len(Watchers))<1:
         REAL_bob=Overseer_threads()
+    
 
 
    
