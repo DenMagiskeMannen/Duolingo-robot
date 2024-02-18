@@ -34,8 +34,7 @@ password = ""
 
 #yKwvl
 
-options = Options()
-options.add_argument("--mute-audio")
+
 #options.add_argument(f"--window-position={x},{y}")
 #driver = webdriver.Chrome(options=options)
 """
@@ -74,8 +73,9 @@ class Overseer():
     def __init__(self,New_account=False):
         self.account=New_account
         self.name="Bob"
-        self.options=options
-        
+        #self.options=options
+        self.options = Options()
+        self.options.add_argument("--mute-audio")
         self.options.add_argument(f"--window-position={200},{25}")
         #self.options.headless = False
         self.driver=webdriver.Chrome(options=self.options)
@@ -196,10 +196,11 @@ class robot():
         fake = Faker()
         self.name = fake.name()
         self.amount=amount
-        self.options=options
-        #options.add_argument(f"--user-data-dir=C:\\Users\\teodo\\AppData\\Local\\Google\\Chrome\\User Data\\Snapshots\\119.0.6045.200\\Profile 1")
-        #options.add_argument("--profile-directory=Profile 1")
-        #self.options.add_argument("--headless=new")
+        #self.options=options
+        self.options = Options()
+        self.options.add_argument("--mute-audio")
+        
+        self.options.add_argument("--headless=new")
         self.options.add_argument(f"--window-position={x},{y}")
         self.driver=webdriver.Chrome(options=self.options)
         self.driver.get("https://www.duolingo.com/lesson/unit/21/level/7")
@@ -224,7 +225,7 @@ class robot():
             for button in login_buttons:
                 #print(button.text)
                 if button.text=="LOG IN":
-                    print("FOUND")
+                    #print("FOUND")
                     email_place.clear()
                     #time.sleep(0.1)
                     email_place.send_keys(email)
@@ -236,7 +237,7 @@ class robot():
             #login_button = login_buttons[index]
             
             #self.driver.execute_script("arguments[0].click();", login_button)
-            print(f"{self.name} login YES")
+            #print(f"{self.name} login YES")
             time.sleep(0.5)
         except:
             #print(f"{self.name} failed login")
@@ -345,7 +346,7 @@ class robot():
     def run(self):
         count=0
         amount=0
-        print(f"{self.name} is at run {amount}")
+        print(f"!!{self.name}!! is at run {amount}")
         while amount < self.amount:
             try:
                 time.sleep(0.1)
@@ -376,6 +377,7 @@ class robot():
                     self.driver.get(f"https://www.duolingo.com/lesson/unit/{rando[0]}/level/{rando[1]}")
 
                 count+=1
+                print(f"{self.name} cycle {count}")
             except:
                 pass
         print(f"{self.name} has finished job with {amount} runs")
