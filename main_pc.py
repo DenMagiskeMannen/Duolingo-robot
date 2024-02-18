@@ -30,7 +30,7 @@ import pyautogui as pg
 
 email = ""
 password = ""
-
+ 
 
 #yKwvl
 
@@ -88,29 +88,31 @@ class Overseer():
         
     def Try_login(self,index):
         try:
-            #elif self.driver.get(url)=="https://www.duolingo.com/lesson/unit/21/level/7":
-            #self.driver.get("https://www.duolingo.com/lesson/unit/21/level/7")
             email_place = self.driver.find_element(By.ID, "web-ui1")
             password_place = self.driver.find_element(By.ID, "web-ui2")
             # Use find_elements to get a list of elements with the specified class
             login_buttons = self.driver.find_elements(By.CLASS_NAME, "_1fHYG")
+            for button in login_buttons:
+                #print(button.text)
+                if button.text=="LOG IN":
+                    print("FOUND")
+                    email_place.clear()
+                    #time.sleep(0.1)
+                    email_place.send_keys(email)
+                    password_place.clear()
+                    #time.sleep(0.1)
+                    password_place.send_keys(password)
+                    button.click()
             # Choose the specific instance you want to interact with (for example, the first one)
-            login_button = login_buttons[index]
-            email_place.clear()
-            #time.sleep(0.1)
-            email_place.send_keys(email)
-            password_place.clear()
-            #time.sleep(0.1)
-            password_place.send_keys(password)
-            self.driver.execute_script("arguments[0].click();", login_button)
+            #login_button = login_buttons[index]
+            
+            #self.driver.execute_script("arguments[0].click();", login_button)
             print(f"{self.name} login YES")
-            #time.sleep(10)
-            #
-            #for i in range(10):
-              #  time.sleep(1)
+            time.sleep(0.5)
         except:
             #print(f"{self.name} failed login")
             pass
+            #print("Couldnt login")
         
     def refresh(self):
         self.driver.navigate().refresh()
@@ -219,15 +221,21 @@ class robot():
             password_place = self.driver.find_element(By.ID, "web-ui2")
             # Use find_elements to get a list of elements with the specified class
             login_buttons = self.driver.find_elements(By.CLASS_NAME, "_1fHYG")
+            for button in login_buttons:
+                #print(button.text)
+                if button.text=="LOG IN":
+                    print("FOUND")
+                    email_place.clear()
+                    #time.sleep(0.1)
+                    email_place.send_keys(email)
+                    password_place.clear()
+                    #time.sleep(0.1)
+                    password_place.send_keys(password)
+                    button.click()
             # Choose the specific instance you want to interact with (for example, the first one)
-            login_button = login_buttons[index]
-            email_place.clear()
-            #time.sleep(0.1)
-            email_place.send_keys(email)
-            password_place.clear()
-            #time.sleep(0.1)
-            password_place.send_keys(password)
-            self.driver.execute_script("arguments[0].click();", login_button)
+            #login_button = login_buttons[index]
+            
+            #self.driver.execute_script("arguments[0].click();", login_button)
             print(f"{self.name} login YES")
             time.sleep(0.5)
         except:
