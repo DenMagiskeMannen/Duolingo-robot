@@ -48,7 +48,7 @@ for i in range(thredlies):
 
 """
 #cookeisese=cool_driver.get_cookies()
-thredlies=1
+thredlies=7
 
 #aria-label="Lesson"
 #aria-label="Story"
@@ -209,6 +209,7 @@ class robot():
             self.driver.add_cookie(cookie)
             """
         title = self.driver.title
+        self.experience=0
         
         print(f"{self.name} has been born, with destinies of {self.amount}")
         self.rbots.append(self)
@@ -347,9 +348,11 @@ class robot():
         count=0
         amount=0
         print(f"!!{self.name}!! is at run {amount}")
+        
         while amount < self.amount:
             try:
                 time.sleep(0.1)
+                self.experience=amount*5
                 self.continue_button()
                 self.often_boxs()
                 self.many_boxes()
@@ -371,19 +374,26 @@ class robot():
                     #self.Account()
                     self.Try_login(2)
                 if count % 30==0:
-                    streak_thing_button()
+                    self.streak_thing_button()
                 if count % 75 == 0:
                     rando=random.choice(actuelle_lessons)
                     self.driver.get(f"https://www.duolingo.com/lesson/unit/{rando[0]}/level/{rando[1]}")
 
                 count+=1
-                print(f"{self.name} cycle {count}")
+                #print(f"{self.name} cycle {count}")
             except:
                 pass
         print(f"{self.name} has finished job with {amount} runs")
         
         self.delete()
-            
+        
+        
+    @classmethod
+    def tally_xp(cls):
+        total_xp=0
+        for robby in cls.rbots:
+            total_xp+=robby.experience
+        print(f"Current Total EXP gained!: {total_xp}")
         
             
         
@@ -479,6 +489,7 @@ while True:
            time.sleep(1)
     elif (len(Watchers))<1:
         REAL_bob=Overseer_threads()
+    robot.tally_xp()
     
 
 
