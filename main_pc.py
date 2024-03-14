@@ -48,7 +48,7 @@ for i in range(thredlies):
 
 """
 #cookeisese=cool_driver.get_cookies()
-thredlies=7
+thredlies=3
 
 #aria-label="Lesson"
 #aria-label="Story"
@@ -200,7 +200,7 @@ class robot():
         self.options = Options()
         self.options.add_argument("--mute-audio")
         
-        self.options.add_argument("--headless=new")
+        #self.options.add_argument("--headless=new")
         self.options.add_argument(f"--window-position={x},{y}")
         self.driver=webdriver.Chrome(options=self.options)
         self.driver.get("https://www.duolingo.com/lesson/unit/21/level/7")
